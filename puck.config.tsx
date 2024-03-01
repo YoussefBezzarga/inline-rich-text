@@ -1,10 +1,13 @@
 import type { Config } from "@measured/puck";
+import { InlineEditor } from "./components/lexical/inline-editor";
+import { LexicalClient } from "./components/lexical/client";
 
-type Props = {
-  HeadingBlock: { title: string };
-};
-
-export const config: Config<Props> = {
+export const config: Config = {
+  root: {
+    render: ({ children }) => {
+      return <div style={{ padding: 64, maxWidth: "600px" }}>{children}</div>;
+    },
+  },
   components: {
     HeadingBlock: {
       fields: {
@@ -13,11 +16,21 @@ export const config: Config<Props> = {
       defaultProps: {
         title: "Heading",
       },
-      render: ({ title }) => (
-        <div style={{ padding: 64 }}>
-          <h1>{title}</h1>
-        </div>
-      ),
+      render: ({ title }) => <h1>{title}</h1>,
+    },
+    RichText: {
+      fields: {
+        state: {
+          type: "custom",
+          render: () => null,
+        },
+      },
+      render: ({ editMode, ...props }) =>
+        editMode ? (
+          <InlineEditor {...props} />
+        ) : (
+          <LexicalClient editing={false} {...props} />
+        ),
     },
   },
 };

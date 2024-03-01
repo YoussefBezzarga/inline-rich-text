@@ -9,17 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lexical/headless": "^0.13.1",
+    "@lexical/react": "^0.13.1",
     "@measured/puck": "^0.13.1",
     "classnames": "^2.3.2",
-    "next": "^13.5.2",
+    "dompurify": "^3.0.9",
+    "jsdom": "^24.0.0",
+    "lexical": "^0.13.1",
+    "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/jsdom": "^21.1.6",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "eslint-config-custom": "*",
-    "typescript": "^4.5.3"
+    "typescript": "^5.3.3"
   }
 }
