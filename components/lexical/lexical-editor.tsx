@@ -14,29 +14,29 @@ const PlaceHolder = () => (
   </div>
 );
 
-const FocusPlugin = ({ editing }: { editing: boolean }) => {
+const FocusPlugin = ({ enabled }: { enabled: boolean }) => {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
-    if (editing) {
+    if (enabled) {
       editor.setEditable(true);
       editor.focus();
       return;
     }
     editor.setEditable(false);
-  }, [editing, editor]);
+  }, [enabled, editor]);
   return null;
 };
 
-export const LexicalClient = ({
+export const LexicalEditor = ({
   id,
   state,
-  editing,
+  enabled,
   onChange = () => {},
 }: {
   id: string;
   state: SerializedEditorState;
-  editing: boolean;
+  enabled: boolean;
   onChange?: (props: { state: SerializedEditorState }) => void;
 }) => {
   return (
@@ -61,7 +61,7 @@ export const LexicalClient = ({
           ignoreSelectionChange
           onChange={(state) => onChange({ state: state.toJSON() })}
         />
-        <FocusPlugin editing={editing} />
+        <FocusPlugin enabled={enabled} />
         <HistoryPlugin />
       </LexicalComposer>
     </div>

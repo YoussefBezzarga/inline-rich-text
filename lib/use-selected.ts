@@ -1,10 +1,6 @@
-"use client";
-
 import { usePuck } from "@measured/puck";
-import { SerializedEditorState } from "lexical";
-import { LexicalClient } from "./client";
 
-const useSelected = (componentId: string) => {
+export const useSelected = (componentId: string) => {
   const {
     appState: {
       ui: { itemSelector },
@@ -46,29 +42,3 @@ const useSelected = (componentId: string) => {
       }),
   };
 };
-
-export function InlineEditor({
-  id,
-  state,
-}: {
-  id: string;
-  state: SerializedEditorState;
-}) {
-  const { isSelected, onChange } = useSelected(id);
-
-  return (
-    <div
-      style={{
-        cursor: isSelected ? "default" : "grab",
-        pointerEvents: "auto",
-      }}
-    >
-      <LexicalClient
-        id={id}
-        state={state}
-        onChange={onChange}
-        editing={isSelected}
-      />
-    </div>
-  );
-}

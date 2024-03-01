@@ -12,6 +12,7 @@ function setupDom() {
   const _window = global.window;
   const _document = global.document;
 
+  // @ts-expect-error
   global.window = dom.window;
   global.document = dom.window.document;
 

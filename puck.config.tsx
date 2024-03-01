@@ -1,8 +1,11 @@
 import type { Config } from "@measured/puck";
-import { InlineEditor } from "./components/lexical/inline-editor";
-import { LexicalClient } from "./components/lexical/client";
+import { Editor } from "./components/lexical/editor-inline";
+import { Render } from "./components/lexical/render-client";
+import { withRichText } from "./lib/with-rich-text";
 
-export const config: Config = {
+export const config: Config<{
+  HeadingBlock: { title: string };
+}> = {
   root: {
     render: ({ children }) => {
       return <div style={{ padding: 64, maxWidth: "600px" }}>{children}</div>;
@@ -18,21 +21,7 @@ export const config: Config = {
       },
       render: ({ title }) => <h1>{title}</h1>,
     },
-    RichText: {
-      fields: {
-        state: {
-          type: "custom",
-          render: () => null,
-        },
-      },
-      render: ({ editMode, ...props }) =>
-        editMode ? (
-          <InlineEditor {...props} />
-        ) : (
-          <LexicalClient editing={false} {...props} />
-        ),
-    },
   },
 };
 
-export default config;
+export default withRichText(config, { Editor: Editor, Render: Render });

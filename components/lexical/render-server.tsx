@@ -1,7 +1,7 @@
 import type { SerializedEditorState } from "lexical/LexicalEditorState";
 import { getHtml } from "./get-html";
 
-export const InlineRender = async (props: { state: SerializedEditorState }) => {
+export const Render = async (props: { state: SerializedEditorState }) => {
   return (
     <div
       dangerouslySetInnerHTML={{
