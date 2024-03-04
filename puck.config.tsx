@@ -1,27 +1,18 @@
 import type { Config } from "@measured/puck";
-import { Editor } from "./components/lexical/editor-inline";
-import { Render } from "./components/lexical/render-client";
-import { withRichText } from "./lib/with-rich-text";
+import { RichTextEditor, RichTextEditorProps } from "./blocks/rich-text-editor";
+import { Columns, ColumnsProps } from "./blocks/columns";
 
 export const config: Config<{
-  HeadingBlock: { title: string };
+  RichTextEditor: RichTextEditorProps;
+  Columns: ColumnsProps;
 }> = {
   root: {
     render: ({ children }) => {
-      return <div style={{ padding: 64, maxWidth: "600px" }}>{children}</div>;
+      return <div style={{ padding: 64, maxWidth: "900px" }}>{children}</div>;
     },
   },
   components: {
-    HeadingBlock: {
-      fields: {
-        title: { type: "text" },
-      },
-      defaultProps: {
-        title: "Heading",
-      },
-      render: ({ title }) => <h1>{title}</h1>,
-    },
+    Columns,
+    RichTextEditor,
   },
 };
-
-export default withRichText(config, { Editor: Editor, Render: Render });

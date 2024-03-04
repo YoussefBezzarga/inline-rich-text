@@ -1,8 +1,8 @@
 "use client";
 
 import type { SerializedEditorState } from "lexical/LexicalEditorState";
-import { LexicalEditor } from "./lexical-editor";
-import { useSelected } from "../../lib/use-selected";
+import { InlineRichTextEditor } from "./lexical/rich-text-editor";
+import { useSelected } from "./use-selected";
 
 export type RichTextProps = {
   state: SerializedEditorState;
@@ -24,7 +24,7 @@ export function Editor({
         pointerEvents: "auto",
       }}
     >
-      <LexicalEditor
+      <InlineRichTextEditor
         id={id}
         state={state}
         onChange={onChange}

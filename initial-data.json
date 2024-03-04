@@ -2,15 +2,8 @@
   "/": {
     "content": [
       {
-        "type": "HeadingBlock",
         "props": {
-          "title": "Edit this page by adding /edit to the end of the URL",
-          "id": "HeadingBlock-1694032984497"
-        }
-      },
-      {
-        "props": {
-          "id": "RichText-0982343f-7320-405b-96a6-2d5070a2b918",
+          "id": "RichTextEditor-2a3e0218-bd49-4da2-b106-569efa708eb3",
           "state": {
             "root": {
               "children": [
@@ -21,61 +14,7 @@
                       "format": 0,
                       "mode": "normal",
                       "style": "",
-                      "text": "Did you hear that? They've shut down the main reactor. We'll be destroyed for sure. This is madness! We're doomed! There'll be no escape for the ",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Princess",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": " this time. What's that? ",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Artoo",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "! ",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Artoo-Detoo",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": ", where are you? At last! Where have you been? They're heading in this direction.",
+                      "text": "Edit this page by adding /edit to the end of the URL",
                       "type": "text",
                       "version": 1
                     }
@@ -83,8 +22,9 @@
                   "direction": "ltr",
                   "format": "",
                   "indent": 0,
-                  "type": "paragraph",
-                  "version": 1
+                  "type": "heading",
+                  "version": 1,
+                  "tag": "h1"
                 },
                 {
                   "children": [
@@ -93,25 +33,7 @@
                       "format": 0,
                       "mode": "normal",
                       "style": "",
-                      "text": "We're a little rushed, so if you'll hurry aboard we'll get out of here. Hello, sir. Which way? All right, men. Load your weapons! Stop that ship! Blast 'em! ",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 1,
-                      "mode": "normal",
-                      "style": "",
-                      "text": "Chewie",
-                      "type": "text",
-                      "version": 1
-                    },
-                    {
-                      "detail": 0,
-                      "format": 0,
-                      "mode": "normal",
-                      "style": "",
-                      "text": ", get us out of here! Oh, my.",
+                      "text": "Some column examples",
                       "type": "text",
                       "version": 1
                     }
@@ -119,8 +41,9 @@
                   "direction": "ltr",
                   "format": "",
                   "indent": 0,
-                  "type": "paragraph",
-                  "version": 1
+                  "type": "heading",
+                  "version": 1,
+                  "tag": "h2"
                 }
               ],
               "direction": "ltr",
@@ -131,10 +54,82 @@
             }
           }
         },
-        "type": "RichText"
+        "type": "RichTextEditor"
+      },
+      {
+        "type": "Columns",
+        "props": {
+          "distribution": "auto",
+          "columns": [{}, {}],
+          "id": "Columns-c2d59834-9619-43c2-a754-d3047b3b8cd6"
+        }
       }
     ],
     "root": { "props": { "title": "" } },
-    "zones": {}
+    "zones": {
+      "Columns-c2d59834-9619-43c2-a754-d3047b3b8cd6:column-0": [
+        {
+          "type": "RichTextEditor",
+          "props": {
+            "id": "RichTextEditor-ac4c92c3-79e1-4712-a977-05e7324b03f2"
+          }
+        }
+      ],
+      "Columns-c2d59834-9619-43c2-a754-d3047b3b8cd6:column-1": [
+        {
+          "props": {
+            "id": "RichTextEditor-10da5292-997e-45b2-9f24-f96c29e0295d",
+            "state": {
+              "root": {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "Command station, this is ST 321. Code Clearance Blue. We're starting our approach. Deactivate the security shield. The security deflector shield will be deactivated when we have confirmation of your code transmission. Stand by. You are clear to proceed.",
+                        "type": "text",
+                        "version": 1
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "paragraph",
+                    "version": 1
+                  },
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "Come on. Hmmm? Look, it's a hat. It's not gonna hurt you. Look.",
+                        "type": "text",
+                        "version": 1
+                      }
+                    ],
+                    "direction": "ltr",
+                    "format": "",
+                    "indent": 0,
+                    "type": "paragraph",
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr",
+                "format": "",
+                "indent": 0,
+                "type": "root",
+                "version": 1
+              }
+            }
+          },
+          "type": "RichTextEditor"
+        }
+      ]
+    }
   }
 }

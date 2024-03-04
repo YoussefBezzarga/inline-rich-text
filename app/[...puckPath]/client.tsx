@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Data, Puck, Render } from "@measured/puck";
-import config from "../../puck.config";
+import { config } from "../../puck.config";
 import { useDemoData } from "../../lib/use-demo-data";
 
 export function Client({ path, isEdit }: { path: string; isEdit: boolean }) {

@@ -1,25 +1,25 @@
 import type { Config } from "@measured/puck";
 
-type RichTextComponent<TState> = (props: {
-  id: string;
-  state: TState;
-}) => JSX.Element;
-
-export function withRichText<TState, TConfig extends Config>(
+export function withInlineEditable<TState, TConfig extends Config>(
   config: TConfig,
   {
+    name,
     Editor,
     Render,
   }: {
-    Editor: RichTextComponent<TState>;
-    Render: RichTextComponent<TState>;
+    name: string;
+    Editor: (props: { id: string; state: TState }) => JSX.Element;
+    Render: (props: {
+      id: string;
+      state: TState;
+    }) => JSX.Element | Promise<JSX.Element>;
   }
 ) {
   return {
     ...config,
     components: {
       ...config.components,
-      RichText: {
+      [name]: {
         fields: {
           state: {
             type: "custom",
@@ -30,8 +30,8 @@ export function withRichText<TState, TConfig extends Config>(
           editMode,
           ...props
         }: {
-          id: string;
           editMode?: boolean;
+          id: string;
           state: TState;
         }) => (editMode ? <Editor {...props} /> : <Render {...props} />),
       },

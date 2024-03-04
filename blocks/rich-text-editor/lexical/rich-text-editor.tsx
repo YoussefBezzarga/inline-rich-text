@@ -4,9 +4,14 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { AutoLinkNode, LinkNode } from "@lexical/link";
+import { ListItemNode, ListNode } from "@lexical/list";
+import { CodeHighlightNode, CodeNode } from "@lexical/code";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { useEffect } from "react";
+import { FocusPlugin } from "./plugins/focus-plugin";
+import { ToolbarPlugin } from "./plugins/toolbar/toolbar-plugin";
+import { useState } from "react";
 
 const PlaceHolder = () => (
   <div style={{ pointerEvents: "none", position: "absolute", top: 0 }}>
@@ -14,21 +19,7 @@ const PlaceHolder = () => (
   </div>
 );
 
-const FocusPlugin = ({ enabled }: { enabled: boolean }) => {
-  const [editor] = useLexicalComposerContext();
-
-  useEffect(() => {
-    if (enabled) {
-      editor.setEditable(true);
-      editor.focus();
-      return;
-    }
-    editor.setEditable(false);
-  }, [enabled, editor]);
-  return null;
-};
-
-export const LexicalEditor = ({
+export const InlineRichTextEditor = ({
   id,
   state,
   enabled,
@@ -39,6 +30,8 @@ export const LexicalEditor = ({
   enabled: boolean;
   onChange?: (props: { state: SerializedEditorState }) => void;
 }) => {
+  const [isLinkEditMode, setIsLinkEditMode] = useState(false);
+
   return (
     <div style={{ position: "relative" }}>
       <LexicalComposer
@@ -46,15 +39,24 @@ export const LexicalEditor = ({
           namespace: id,
           editable: false,
           editorState: JSON.stringify(state),
+          nodes: [
+            HeadingNode,
+            QuoteNode,
+            AutoLinkNode,
+            LinkNode,
+            ListItemNode,
+            ListNode,
+            CodeHighlightNode,
+            CodeNode,
+          ],
           onError(error: unknown) {
             throw error;
           },
         }}
       >
-        {/*<Toolbar />*/}
         <RichTextPlugin
           contentEditable={<ContentEditable style={{ outline: "none" }} />}
-          placeholder={PlaceHolder}
+          placeholder={enabled && PlaceHolder}
           ErrorBoundary={LexicalErrorBoundary}
         />
         <OnChangePlugin
@@ -63,6 +65,12 @@ export const LexicalEditor = ({
         />
         <FocusPlugin enabled={enabled} />
         <HistoryPlugin />
+
+        <ToolbarPlugin
+          id={id}
+          showToolbar={enabled}
+          setIsLinkEditMode={setIsLinkEditMode}
+        />
       </LexicalComposer>
     </div>
   );

@@ -1,0 +1,30 @@
+.ToolbarPlugin-action {
+  background: transparent;
+  border: none;
+  color: var(--puck-color-grey-08);
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 50ms ease-in;
+}
+
+.ToolbarPlugin-action:focus-visible {
+  outline: 2px solid var(--puck-color-azure-05);
+  outline-offset: -2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ToolbarPlugin-action:hover {
+    color: var(--puck-color-azure-06);
+    transition: none;
+  }
+}
+
+.ToolbarPlugin-action:active {
+  color: var(--puck-color-azure-07);
+  transition: none;
+}

@@ -1,10 +1,15 @@
-"use server";
-
+import type { SerializedEditorState } from "lexical/LexicalEditorState";
 import { $generateHtmlFromNodes } from "@lexical/html";
 import { createHeadlessEditor } from "@lexical/headless";
-import { SerializedEditorState } from "lexical";
 import { JSDOM } from "jsdom";
 import DOMPurify from "dompurify";
+
+const editor = createHeadlessEditor({
+  namespace: "ssr-editor",
+  onError: (error) => {
+    console.log("headless lexical error", error);
+  },
+});
 
 function setupDom() {
   const dom = new JSDOM();
@@ -22,27 +27,24 @@ function setupDom() {
   };
 }
 
-export async function getHtml(
-  serializedEditorState: SerializedEditorState
-): Promise<string> {
-  if (!serializedEditorState) {
+export async function ServerSideRender({
+  state,
+}: {
+  state: SerializedEditorState;
+}): Promise<JSX.Element> {
+  if (!state) {
     return null;
   }
 
-  const editor = createHeadlessEditor({
-    namespace: "ssr-editor",
-    onError: (error) => {
-      console.log("headless lexical error", error);
-    },
-  });
-
-  editor.setEditorState(editor.parseEditorState(serializedEditorState));
-
-  return new Promise((resolve) =>
+  const html = await new Promise((resolve) => {
     editor.update(() => {
       const cleanup = setupDom();
-      const purify = DOMPurify(window);
+
       try {
+        editor.setEditorState(editor.parseEditorState(state));
+
+        const purify = DOMPurify(window);
+
         const raw = $generateHtmlFromNodes(editor);
         const html = purify.sanitize(raw);
 
@@ -50,6 +52,8 @@ export async function getHtml(
       } finally {
         cleanup();
       }
-    })
-  );
+    });
+  });
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
