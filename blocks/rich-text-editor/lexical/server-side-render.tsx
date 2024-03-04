@@ -36,7 +36,7 @@ export async function ServerSideRender({
     return null;
   }
 
-  const html = await new Promise((resolve) => {
+  const html: string = await new Promise((resolve) => {
     editor.update(() => {
       const cleanup = setupDom();
 

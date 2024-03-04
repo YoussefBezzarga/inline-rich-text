@@ -1,4 +1,4 @@
-.ToolbarPlugin-action {
+.ToolbarButton {
   background: transparent;
   border: none;
   color: var(--puck-color-grey-08);
@@ -12,19 +12,20 @@
   transition: color 50ms ease-in;
 }
 
-.ToolbarPlugin-action:focus-visible {
+.ToolbarButton:focus-visible {
   outline: 2px solid var(--puck-color-azure-05);
   outline-offset: -2px;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .ToolbarPlugin-action:hover {
+@media (hover: hover) {
+  .ToolbarButton:hover {
+    background: var(--puck-color-grey-2);
     color: var(--puck-color-azure-06);
-    transition: none;
+    cursor: pointer;
   }
 }
 
-.ToolbarPlugin-action:active {
+.ToolbarButton:active {
   color: var(--puck-color-azure-07);
   transition: none;
 }

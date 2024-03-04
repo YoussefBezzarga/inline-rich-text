@@ -10,7 +10,7 @@ import { ListItemNode, ListNode } from "@lexical/list";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { FocusPlugin } from "./plugins/focus-plugin";
-import { ToolbarPlugin } from "./plugins/toolbar/toolbar-plugin";
+import { ToolbarPlugin } from "./plugins/toolbar-plugin";
 import { useState } from "react";
 
 const PlaceHolder = () => (
