@@ -1,17 +1,17 @@
-import React from "react";
-import { ComponentConfig } from "@measured/puck";
-import { Section } from "../../components/section";
-import getClassNameFactory from "../rich-text-editor/lexical/utils/get-class-name-factory";
-import styles from "./styles.module.css";
+import React from "react"
+import { ComponentConfig } from "@measured/puck"
+import { Section } from "../../components/section"
+import getClassNameFactory from "../rich-text-editor/lexical/utils/get-class-name-factory"
+import styles from "./styles.module.css"
 
-const getClassName = getClassNameFactory("Columns", styles);
+const getClassName = getClassNameFactory("Columns", styles)
 
 export type ColumnsProps = {
-  distribution: "auto" | "manual";
+  distribution: "auto" | "manual"
   columns: {
-    span?: number;
-  }[];
-};
+    span?: number
+  }[]
+}
 
 export const Columns: ComponentConfig<ColumnsProps> = {
   fields: {
@@ -78,6 +78,6 @@ export const Columns: ComponentConfig<ColumnsProps> = {
           ))}
         </div>
       </Section>
-    );
+    )
   },
-};
+}

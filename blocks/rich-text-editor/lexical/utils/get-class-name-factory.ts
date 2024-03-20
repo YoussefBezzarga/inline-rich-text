@@ -1,52 +1,52 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import classnames from "classnames";
+import classnames from "classnames"
 
 export const getGlobalClassName = (rootClass, options) => {
   if (typeof options === "string") {
-    return `${rootClass}-${options}`;
+    return `${rootClass}-${options}`
   } else {
-    const mappedOptions = {};
+    const mappedOptions = {}
     for (const option in options) {
-      mappedOptions[`${rootClass}--${option}`] = options[option];
+      mappedOptions[`${rootClass}--${option}`] = options[option]
     }
 
     return classnames({
       [rootClass]: true,
       ...mappedOptions,
-    });
+    })
   }
-};
+}
 
 const getClassNameFactory =
   (rootClass, styles, { baseClass = "" } = {}) =>
   (options = {}) => {
-    let descendant = false;
-    let modifiers = false;
+    let descendant = false
+    let modifiers = false
 
     if (typeof options === "string") {
-      descendant = options;
+      descendant = options
     } else if (typeof options === "object") {
-      modifiers = options;
+      modifiers = options
     }
 
     if (descendant) {
-      const style = styles[`${rootClass}-${descendant}`];
+      const style = styles[`${rootClass}-${descendant}`]
 
       if (style) {
-        return baseClass + styles[`${rootClass}-${descendant}`] || "";
+        return baseClass + styles[`${rootClass}-${descendant}`] || ""
       }
 
-      return "";
+      return ""
     } else if (modifiers) {
-      const prefixedModifiers = {};
+      const prefixedModifiers = {}
 
       for (const modifier in modifiers) {
         prefixedModifiers[styles[`${rootClass}--${modifier}`]] =
-          modifiers[modifier];
+          modifiers[modifier]
       }
 
-      const c = styles[rootClass];
+      const c = styles[rootClass]
 
       return (
         baseClass +
@@ -54,10 +54,10 @@ const getClassNameFactory =
           [c]: !!c, // only apply the class if it exists
           ...prefixedModifiers,
         })
-      );
+      )
     } else {
-      return baseClass + styles[rootClass] || "";
+      return baseClass + styles[rootClass] || ""
     }
-  };
+  }
 
-export default getClassNameFactory;
+export default getClassNameFactory

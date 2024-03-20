@@ -6,18 +6,18 @@
  *
  */
 
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import { $isListNode, ListNode } from "@lexical/list";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
-import { $isHeadingNode, $isQuoteNode } from "@lexical/rich-text";
-import { $isParentElementRTL } from "@lexical/selection";
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link"
+import { $isListNode, ListNode } from "@lexical/list"
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
+import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode"
+import { $isHeadingNode, $isQuoteNode } from "@lexical/rich-text"
+import { $isParentElementRTL } from "@lexical/selection"
 import {
   $findMatchingParent,
   $getNearestBlockElementAncestorOrThrow,
   $getNearestNodeOfType,
   mergeRegister,
-} from "@lexical/utils";
+} from "@lexical/utils"
 import {
   $createParagraphNode,
   $getSelection,
@@ -31,107 +31,107 @@ import {
   FORMAT_TEXT_COMMAND,
   KEY_MODIFIER_COMMAND,
   SELECTION_CHANGE_COMMAND,
-} from "lexical";
-import { Dispatch, useCallback, useEffect, useState } from "react";
+} from "lexical"
+import { Dispatch, useCallback, useEffect, useState } from "react"
 
-import { createPortal } from "react-dom";
-import { Bold, Italic, RemoveFormatting } from "lucide-react";
-import { getSelectedNode } from "../../utils/get-selected-node";
-import { sanitizeUrl } from "../../utils/url";
-import { Button } from "../../ui/button";
-import { getToolbarPortal } from "../../utils/get-toolbar-portal";
+import { createPortal } from "react-dom"
+import { Bold, Italic, RemoveFormatting } from "lucide-react"
+import { getSelectedNode } from "../../utils/get-selected-node"
+import { sanitizeUrl } from "../../utils/url"
+import { Button } from "../../ui/button"
+import { getToolbarPortal } from "../../utils/get-toolbar-portal"
 
-import { isApple } from "../../utils/is-apple";
-import { BlockFormatDropDown, blockFormats } from "./block-format-dropdown";
-import { ElementFormatDropdown } from "./element-format-dropdown";
+import { isApple } from "../../utils/is-apple"
+import { BlockFormatDropDown, blockFormats } from "./block-format-dropdown"
+import { ElementFormatDropdown } from "./element-format-dropdown"
 
-const IS_APPLE = isApple();
+const IS_APPLE = isApple()
 
 export function ToolbarPlugin({
   id,
   showToolbar,
   setIsLinkEditMode,
 }: {
-  id: string;
-  showToolbar: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
+  id: string
+  showToolbar: boolean
+  setIsLinkEditMode: Dispatch<boolean>
 }): JSX.Element {
-  const [editor] = useLexicalComposerContext();
-  const [activeEditor, setActiveEditor] = useState(editor);
+  const [editor] = useLexicalComposerContext()
+  const [activeEditor, setActiveEditor] = useState(editor)
   const [blockType, setBlockType] =
-    useState<keyof typeof blockFormats>("paragraph");
+    useState<keyof typeof blockFormats>("paragraph")
 
-  const [elementFormat, setElementFormat] = useState<ElementFormatType>("left");
-  const [isLink, setIsLink] = useState(false);
-  const [isBold, setIsBold] = useState(false);
-  const [isItalic, setIsItalic] = useState(false);
-  const [_isUnderline, setIsUnderline] = useState(false);
+  const [elementFormat, setElementFormat] = useState<ElementFormatType>("left")
+  const [isLink, setIsLink] = useState(false)
+  const [isBold, setIsBold] = useState(false)
+  const [isItalic, setIsItalic] = useState(false)
+  const [_isUnderline, setIsUnderline] = useState(false)
 
-  const [isRTL, setIsRTL] = useState(false);
+  const [isRTL, setIsRTL] = useState(false)
 
   const $updateToolbar = useCallback(() => {
-    const selection = $getSelection();
+    const selection = $getSelection()
     if ($isRangeSelection(selection)) {
-      const anchorNode = selection.anchor.getNode();
+      const anchorNode = selection.anchor.getNode()
       let element =
         anchorNode.getKey() === "root"
           ? anchorNode
           : $findMatchingParent(anchorNode, (e) => {
-              const parent = e.getParent();
-              return parent !== null && $isRootOrShadowRoot(parent);
-            });
+              const parent = e.getParent()
+              return parent !== null && $isRootOrShadowRoot(parent)
+            })
 
       if (element === null) {
-        element = anchorNode.getTopLevelElementOrThrow();
+        element = anchorNode.getTopLevelElementOrThrow()
       }
 
-      const elementKey = element.getKey();
-      const elementDOM = activeEditor.getElementByKey(elementKey);
+      const elementKey = element.getKey()
+      const elementDOM = activeEditor.getElementByKey(elementKey)
 
       // Update text format
-      setIsBold(selection.hasFormat("bold"));
-      setIsItalic(selection.hasFormat("italic"));
-      setIsUnderline(selection.hasFormat("underline"));
-      setIsRTL($isParentElementRTL(selection));
+      setIsBold(selection.hasFormat("bold"))
+      setIsItalic(selection.hasFormat("italic"))
+      setIsUnderline(selection.hasFormat("underline"))
+      setIsRTL($isParentElementRTL(selection))
 
       // Update links
-      const node = getSelectedNode(selection);
-      const parent = node.getParent();
+      const node = getSelectedNode(selection)
+      const parent = node.getParent()
       if ($isLinkNode(parent) || $isLinkNode(node)) {
-        setIsLink(true);
+        setIsLink(true)
       } else {
-        setIsLink(false);
+        setIsLink(false)
       }
 
       if (elementDOM !== null) {
         if ($isListNode(element)) {
           const parentList = $getNearestNodeOfType<ListNode>(
             anchorNode,
-            ListNode
-          );
+            ListNode,
+          )
           const type = parentList
             ? parentList.getListType()
-            : element.getListType();
+            : element.getListType()
           if (type in blockFormats) {
-            setBlockType(type as keyof typeof blockFormats);
+            setBlockType(type as keyof typeof blockFormats)
           }
         } else {
           const type = $isHeadingNode(element)
             ? element.getTag()
-            : element.getType();
+            : element.getType()
           if (type in blockFormats) {
-            setBlockType(type as keyof typeof blockFormats);
+            setBlockType(type as keyof typeof blockFormats)
           }
         }
       }
       // Handle buttons
-      let matchingParent;
+      let matchingParent
       if ($isLinkNode(parent)) {
         // If node is a link, we need to fetch the parent paragraph node to set format
         matchingParent = $findMatchingParent(
           node,
-          (parentNode) => $isElementNode(parentNode) && !parentNode.isInline()
-        );
+          (parentNode) => $isElementNode(parentNode) && !parentNode.isInline(),
+        )
       }
 
       // If matchingParent is a valid node, pass it's format type
@@ -139,69 +139,69 @@ export function ToolbarPlugin({
         $isElementNode(matchingParent)
           ? matchingParent.getFormatType()
           : $isElementNode(node)
-          ? node.getFormatType()
-          : parent?.getFormatType() || "left"
-      );
+            ? node.getFormatType()
+            : parent?.getFormatType() || "left",
+      )
     }
-  }, [activeEditor]);
+  }, [activeEditor])
 
   useEffect(() => {
     return editor.registerCommand(
       SELECTION_CHANGE_COMMAND,
       (_payload, newEditor) => {
-        $updateToolbar();
-        setActiveEditor(newEditor);
-        return false;
+        $updateToolbar()
+        setActiveEditor(newEditor)
+        return false
       },
-      COMMAND_PRIORITY_CRITICAL
-    );
-  }, [editor, $updateToolbar]);
+      COMMAND_PRIORITY_CRITICAL,
+    )
+  }, [editor, $updateToolbar])
 
   useEffect(() => {
     return mergeRegister(
       activeEditor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
-          $updateToolbar();
-        });
-      })
-    );
-  }, [$updateToolbar, editor, activeEditor]);
+          $updateToolbar()
+        })
+      }),
+    )
+  }, [$updateToolbar, editor, activeEditor])
 
   useEffect(() => {
     return activeEditor.registerCommand(
       KEY_MODIFIER_COMMAND,
       (payload) => {
-        const event: KeyboardEvent = payload;
-        const { code, ctrlKey, metaKey } = event;
+        const event: KeyboardEvent = payload
+        const { code, ctrlKey, metaKey } = event
 
         if (code === "KeyK" && (ctrlKey || metaKey)) {
-          event.preventDefault();
-          let url: string | null;
+          event.preventDefault()
+          let url: string | null
           if (!isLink) {
-            setIsLinkEditMode(true);
-            url = sanitizeUrl("https://");
+            setIsLinkEditMode(true)
+            url = sanitizeUrl("https://")
           } else {
-            setIsLinkEditMode(false);
-            url = null;
+            setIsLinkEditMode(false)
+            url = null
           }
-          return activeEditor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
+          return activeEditor.dispatchCommand(TOGGLE_LINK_COMMAND, url)
         }
-        return false;
+        return false
       },
-      COMMAND_PRIORITY_NORMAL
-    );
-  }, [activeEditor, isLink, setIsLinkEditMode]);
+      COMMAND_PRIORITY_NORMAL,
+    )
+  }, [activeEditor, isLink, setIsLinkEditMode])
 
   const clearFormatting = useCallback(() => {
     activeEditor.update(() => {
-      const selection = $getSelection();
+      const selection = $getSelection()
       if ($isRangeSelection(selection)) {
-        const anchor = selection.anchor;
-        const focus = selection.focus;
-        const nodes = selection.getNodes();
+        const anchor = selection.anchor
+        const focus = selection.focus
+        const nodes = selection.getNodes()
 
         if (anchor.key === focus.key && anchor.offset === focus.offset) {
-          return;
+          return
         }
 
         nodes.forEach((node, idx) => {
@@ -209,31 +209,31 @@ export function ToolbarPlugin({
           // So that we don't format unselected text inside those nodes
           if ($isTextNode(node)) {
             // Use a separate variable to ensure TS does not lose the refinement
-            let textNode = node;
+            let textNode = node
             if (idx === 0 && anchor.offset !== 0) {
-              textNode = textNode.splitText(anchor.offset)[1] || textNode;
+              textNode = textNode.splitText(anchor.offset)[1] || textNode
             }
             if (idx === nodes.length - 1) {
-              textNode = textNode.splitText(focus.offset)[0] || textNode;
+              textNode = textNode.splitText(focus.offset)[0] || textNode
             }
 
             if (textNode.__style !== "") {
-              textNode.setStyle("");
+              textNode.setStyle("")
             }
             if (textNode.__format !== 0) {
-              textNode.setFormat(0);
-              $getNearestBlockElementAncestorOrThrow(textNode).setFormat("");
+              textNode.setFormat(0)
+              $getNearestBlockElementAncestorOrThrow(textNode).setFormat("")
             }
-            node = textNode;
+            node = textNode
           } else if ($isHeadingNode(node) || $isQuoteNode(node)) {
-            node.replace($createParagraphNode(), true);
+            node.replace($createParagraphNode(), true)
           } else if ($isDecoratorBlockNode(node)) {
-            node.setFormat("");
+            node.setFormat("")
           }
-        });
+        })
       }
-    });
-  }, [activeEditor]);
+    })
+  }, [activeEditor])
 
   /*
   const insertLink = useCallback(() => {
@@ -247,14 +247,14 @@ export function ToolbarPlugin({
   }, [editor, isLink, setIsLinkEditMode]);
   */
 
-  const portalTarget = getToolbarPortal(id);
+  const portalTarget = getToolbarPortal(id)
 
   if (!showToolbar) {
-    return null;
+    return null
   }
 
   if (!portalTarget) {
-    return null;
+    return null
   }
 
   return createPortal(
@@ -276,7 +276,7 @@ export function ToolbarPlugin({
       />
       <Button
         onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")
         }}
         active={isBold}
         title={IS_APPLE ? "Bold (⌘B)" : "Bold (Ctrl+B)"}
@@ -288,7 +288,7 @@ export function ToolbarPlugin({
       </Button>
       <Button
         onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")
         }}
         active={isItalic}
         title={IS_APPLE ? "Italic (⌘I)" : "Italic (Ctrl+I)"}
@@ -314,6 +314,6 @@ export function ToolbarPlugin({
         <RemoveFormatting size={16} />
       </Button>
     </div>,
-    portalTarget
-  );
+    portalTarget,
+  )
 }

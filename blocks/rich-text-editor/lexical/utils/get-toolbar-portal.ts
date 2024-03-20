@@ -1,8 +1,8 @@
 export const getToolbarPortal = (id: string) => {
   return document
     .querySelector(`[data-rfd-draggable-id="draggable-${id}"]`)
-    ?.querySelector("button").parentElement;
-};
+    ?.querySelector("button").parentElement
+}
 
 /*    
   return document

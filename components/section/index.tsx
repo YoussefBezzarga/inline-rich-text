@@ -1,16 +1,16 @@
-import { CSSProperties, ReactNode } from "react";
-import getClassNameFactory from "../../blocks/rich-text-editor/lexical/utils/get-class-name-factory";
-import styles from "./styles.module.css";
+import { CSSProperties, ReactNode } from "react"
+import getClassNameFactory from "../../blocks/rich-text-editor/lexical/utils/get-class-name-factory"
+import styles from "./styles.module.css"
 
-const getClassName = getClassNameFactory("Section", styles);
+const getClassName = getClassNameFactory("Section", styles)
 
 export type SectionProps = {
-  className?: string;
-  children: ReactNode;
-  padding?: string;
-  maxWidth?: string;
-  style?: CSSProperties;
-};
+  className?: string
+  children: ReactNode
+  padding?: string
+  maxWidth?: string
+  style?: CSSProperties
+}
 
 export const Section = ({
   children,
@@ -32,5 +32,5 @@ export const Section = ({
         {children}
       </div>
     </div>
-  );
-};
+  )
+}

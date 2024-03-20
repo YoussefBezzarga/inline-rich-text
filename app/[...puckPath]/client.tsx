@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { Button, Data, Puck, Render } from "@measured/puck";
-import { config } from "../../puck.config";
-import { useDemoData } from "../../lib/use-demo-data";
+import { Button, Data, Puck, Render } from "@measured/puck"
+import { config } from "../../puck.config"
+import { useDemoData } from "../../lib/use-demo-data"
 
 export function Client({ path, isEdit }: { path: string; isEdit: boolean }) {
   const { data, resolvedData, key } = useDemoData({
     path,
     isEdit,
-  });
+  })
 
   if (isEdit) {
     return (
@@ -17,7 +17,7 @@ export function Client({ path, isEdit }: { path: string; isEdit: boolean }) {
           config={config}
           data={data}
           onPublish={async (data: Data) => {
-            localStorage.setItem(key, JSON.stringify(data));
+            localStorage.setItem(key, JSON.stringify(data))
           }}
           headerPath={path}
           overrides={{
@@ -33,11 +33,11 @@ export function Client({ path, isEdit }: { path: string; isEdit: boolean }) {
           }}
         />
       </div>
-    );
+    )
   }
 
   if (data) {
-    return <Render config={config} data={resolvedData} />;
+    return <Render config={config} data={resolvedData} />
   }
 
   return (
@@ -55,7 +55,7 @@ export function Client({ path, isEdit }: { path: string; isEdit: boolean }) {
         <p>Page does not exist in session storage</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default Client;
+export default Client

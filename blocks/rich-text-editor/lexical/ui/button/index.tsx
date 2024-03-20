@@ -1,9 +1,9 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from "react"
 
-import getClassNameFactory from "../../utils/get-class-name-factory";
-import styles from "./styles.module.css";
+import getClassNameFactory from "../../utils/get-class-name-factory"
+import styles from "./styles.module.css"
 
-const getClassName = getClassNameFactory("ToolbarButton", styles);
+const getClassName = getClassNameFactory("ToolbarButton", styles)
 
 export const Button = ({
   active,
@@ -17,5 +17,5 @@ export const Button = ({
       }}
       {...props}
     />
-  );
-};
+  )
+}

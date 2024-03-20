@@ -1,4 +1,4 @@
-import { usePuck } from "@measured/puck";
+import { usePuck } from "@measured/puck"
 
 export const useSelected = (componentId: string) => {
   const {
@@ -7,25 +7,25 @@ export const useSelected = (componentId: string) => {
       data,
     },
     dispatch,
-  } = usePuck();
+  } = usePuck()
 
   if (!itemSelector) {
     return {
       isSelected: false,
       onChange: () => {},
-    };
+    }
   }
 
   const item =
     itemSelector.zone && itemSelector.zone !== "default-zone"
       ? data.zones[itemSelector.zone][itemSelector.index]
-      : data.content[itemSelector.index];
+      : data.content[itemSelector.index]
 
   if (item.props.id !== componentId) {
     return {
       isSelected: false,
       onChange: () => {},
-    };
+    }
   }
 
   return {
@@ -40,5 +40,5 @@ export const useSelected = (componentId: string) => {
           type: item.type,
         },
       }),
-  };
-};
+  }
+}

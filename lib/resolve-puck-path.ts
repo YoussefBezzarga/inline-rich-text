@@ -1,7 +1,7 @@
 const resolvePuckPath = (puckPath: string[] = []) => {
-  const hasPath = puckPath.length > 0;
+  const hasPath = puckPath.length > 0
 
-  const isEdit = hasPath ? puckPath[puckPath.length - 1] === "edit" : false;
+  const isEdit = hasPath ? puckPath[puckPath.length - 1] === "edit" : false
 
   return {
     isEdit,
@@ -9,7 +9,7 @@ const resolvePuckPath = (puckPath: string[] = []) => {
       ? [...puckPath].slice(0, puckPath.length - 1)
       : [...puckPath]
     ).join("/")}`,
-  };
-};
+  }
+}
 
-export default resolvePuckPath;
+export default resolvePuckPath

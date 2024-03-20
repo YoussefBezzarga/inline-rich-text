@@ -1,10 +1,10 @@
-"use server";
+"use server"
 
-import type { ComponentProps } from "react";
-import { ServerSideRender } from "./lexical/server-side-render";
+import type { ComponentProps } from "react"
+import { ServerSideRender } from "./lexical/server-side-render"
 
 export async function Render(
-  props: ComponentProps<typeof ServerSideRender>
+  props: ComponentProps<typeof ServerSideRender>,
 ): Promise<JSX.Element> {
-  return <ServerSideRender {...props} />;
+  return <ServerSideRender {...props} />
 }

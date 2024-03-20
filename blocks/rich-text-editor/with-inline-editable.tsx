@@ -1,4 +1,4 @@
-import type { Config } from "@measured/puck";
+import type { Config } from "@measured/puck"
 
 export function withInlineEditable<TState, TConfig extends Config>(
   config: TConfig,
@@ -7,13 +7,13 @@ export function withInlineEditable<TState, TConfig extends Config>(
     Editor,
     Render,
   }: {
-    name: string;
-    Editor: (props: { id: string; state: TState }) => JSX.Element;
+    name: string
+    Editor: (props: { id: string; state: TState }) => JSX.Element
     Render: (props: {
-      id: string;
-      state: TState;
-    }) => JSX.Element | Promise<JSX.Element>;
-  }
+      id: string
+      state: TState
+    }) => JSX.Element | Promise<JSX.Element>
+  },
 ) {
   return {
     ...config,
@@ -30,11 +30,11 @@ export function withInlineEditable<TState, TConfig extends Config>(
           editMode,
           ...props
         }: {
-          editMode?: boolean;
-          id: string;
-          state: TState;
+          editMode?: boolean
+          id: string
+          state: TState
         }) => (editMode ? <Editor {...props} /> : <Render {...props} />),
       },
     },
-  };
+  }
 }

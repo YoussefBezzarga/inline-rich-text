@@ -1,59 +1,59 @@
-import type { SerializedEditorState } from "lexical/LexicalEditorState";
-import { $generateHtmlFromNodes } from "@lexical/html";
-import { createHeadlessEditor } from "@lexical/headless";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
+import type { SerializedEditorState } from "lexical/LexicalEditorState"
+import { $generateHtmlFromNodes } from "@lexical/html"
+import { createHeadlessEditor } from "@lexical/headless"
+import { JSDOM } from "jsdom"
+import DOMPurify from "dompurify"
 
 const editor = createHeadlessEditor({
   namespace: "ssr-editor",
   onError: (error) => {
-    console.log("headless lexical error", error);
+    console.log("headless lexical error", error)
   },
-});
+})
 
 function setupDom() {
-  const dom = new JSDOM();
+  const dom = new JSDOM()
 
-  const _window = global.window;
-  const _document = global.document;
+  const _window = global.window
+  const _document = global.document
 
   // @ts-expect-error we are intentionally fooling lexical
-  global.window = dom.window;
-  global.document = dom.window.document;
+  global.window = dom.window
+  global.document = dom.window.document
 
   return () => {
-    global.window = _window;
-    global.document = _document;
-  };
+    global.window = _window
+    global.document = _document
+  }
 }
 
 export async function ServerSideRender({
   state,
 }: {
-  state: SerializedEditorState;
+  state: SerializedEditorState
 }): Promise<JSX.Element> {
   if (!state) {
-    return null;
+    return null
   }
 
   const html: string = await new Promise((resolve) => {
     editor.update(() => {
-      const cleanup = setupDom();
+      const cleanup = setupDom()
 
       try {
-        editor.setEditorState(editor.parseEditorState(state));
+        editor.setEditorState(editor.parseEditorState(state))
 
-        const purify = DOMPurify(window);
+        const purify = DOMPurify(window)
 
-        const raw = $generateHtmlFromNodes(editor);
-        const html = purify.sanitize(raw);
+        const raw = $generateHtmlFromNodes(editor)
+        const html = purify.sanitize(raw)
 
-        resolve(html);
+        resolve(html)
       } finally {
-        cleanup();
+        cleanup()
       }
-    });
-  });
+    })
+  })
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
 }
