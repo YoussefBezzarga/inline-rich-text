@@ -17,7 +17,7 @@ function setupDom() {
   const _window = global.window;
   const _document = global.document;
 
-  // @ts-expect-error
+  // @ts-expect-error we are intentionally fooling lexical
   global.window = dom.window;
   global.document = dom.window.document;
 

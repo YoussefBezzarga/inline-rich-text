@@ -9,9 +9,9 @@ import { AutoLinkNode, LinkNode } from "@lexical/link";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { useState } from "react";
 import { FocusPlugin } from "./plugins/focus-plugin";
 import { ToolbarPlugin } from "./plugins/toolbar-plugin";
-import { useState } from "react";
 
 const PlaceHolder = () => (
   <div style={{ pointerEvents: "none", position: "absolute", top: 0 }}>
@@ -30,7 +30,7 @@ export const InlineRichTextEditor = ({
   enabled: boolean;
   onChange?: (props: { state: SerializedEditorState }) => void;
 }) => {
-  const [isLinkEditMode, setIsLinkEditMode] = useState(false);
+  const [_isLinkEditMode, setIsLinkEditMode] = useState(false);
 
   return (
     <div style={{ position: "relative" }}>

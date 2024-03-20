@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./styles.module.css";
-import { Section } from "../../components/section";
-import getClassNameFactory from "../../lib/get-class-name-factory";
 import { ComponentConfig } from "@measured/puck";
+import { Section } from "../../components/section";
+import getClassNameFactory from "../rich-text-editor/lexical/utils/get-class-name-factory";
+import styles from "./styles.module.css";
 
 const getClassName = getClassNameFactory("Columns", styles);
 

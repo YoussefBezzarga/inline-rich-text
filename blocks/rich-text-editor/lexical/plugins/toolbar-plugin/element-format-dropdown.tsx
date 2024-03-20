@@ -1,55 +1,10 @@
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import {
-  $isListNode,
-  INSERT_ORDERED_LIST_COMMAND,
-  INSERT_UNORDERED_LIST_COMMAND,
-  ListNode,
-} from "@lexical/list";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
-import {
-  $createHeadingNode,
-  $createQuoteNode,
-  $isHeadingNode,
-  $isQuoteNode,
-  HeadingTagType,
-} from "@lexical/rich-text";
-import { $isParentElementRTL, $setBlocksType } from "@lexical/selection";
-import {
-  $findMatchingParent,
-  $getNearestBlockElementAncestorOrThrow,
-  $getNearestNodeOfType,
-  mergeRegister,
-} from "@lexical/utils";
-import {
-  $createParagraphNode,
-  $getSelection,
-  $isElementNode,
-  $isRangeSelection,
-  $isRootOrShadowRoot,
-  $isTextNode,
-  COMMAND_PRIORITY_CRITICAL,
-  COMMAND_PRIORITY_NORMAL,
   ElementFormatType,
   FORMAT_ELEMENT_COMMAND,
-  FORMAT_TEXT_COMMAND,
-  KEY_MODIFIER_COMMAND,
   LexicalEditor,
-  SELECTION_CHANGE_COMMAND,
 } from "lexical";
 
 import {
-  Pilcrow,
-  Code,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-  ListOrdered,
-  List,
-  TextQuote,
   LucideIcon,
   AlignCenter,
   AlignJustify,
@@ -68,7 +23,7 @@ const ELEMENT_FORMAT_OPTIONS: {
     Icon: LucideIcon;
     IconRTL: LucideIcon;
     name: string;
-    command: string;
+    command: ElementFormatType;
   };
 } = {
   left: {
@@ -130,7 +85,8 @@ export function ElementFormatDropdown({
 
       <DropdownContent>
         {Object.keys(ELEMENT_FORMAT_OPTIONS).map((key) => {
-          const { Icon, IconRTL, name, command } = ELEMENT_FORMAT_OPTIONS[key];
+          const { Icon, IconRTL, name, command } =
+            ELEMENT_FORMAT_OPTIONS[key as keyof typeof ELEMENT_FORMAT_OPTIONS];
           return (
             <DropdownItem
               key={key}

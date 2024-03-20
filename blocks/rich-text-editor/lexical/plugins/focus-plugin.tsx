@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useEffect } from "react";
 
-export const FocusPlugin = ({ enabled }: { enabled: boolean }) => {
+export const FocusPlugin = ({ enabled }: { enabled: boolean }): null => {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
@@ -12,5 +12,6 @@ export const FocusPlugin = ({ enabled }: { enabled: boolean }) => {
     }
     editor.setEditable(false);
   }, [enabled, editor]);
+
   return null;
 };

@@ -1,8 +1,8 @@
 import * as Menu from "@radix-ui/react-dropdown-menu";
 import { ComponentProps, PropsWithChildren } from "react";
 
+import getClassNameFactory from "../../utils/get-class-name-factory";
 import styles from "./styles.module.css";
-import getClassNameFactory from "../../../../../lib/get-class-name-factory";
 
 const getClassName = getClassNameFactory("DropdownMenu", styles);
 

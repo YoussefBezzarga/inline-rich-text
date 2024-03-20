@@ -34,16 +34,16 @@ import {
 } from "lexical";
 import { Dispatch, useCallback, useEffect, useState } from "react";
 
-import { getSelectedNode } from "../../utils/getSelectedNode";
-import { sanitizeUrl } from "../../utils/url";
 import { createPortal } from "react-dom";
 import { Bold, Italic, RemoveFormatting } from "lucide-react";
+import { getSelectedNode } from "../../utils/get-selected-node";
+import { sanitizeUrl } from "../../utils/url";
 import { Button } from "../../ui/button";
-import { getToolbarPortal } from "../../utils/getToolbarPortal";
+import { getToolbarPortal } from "../../utils/get-toolbar-portal";
 
+import { isApple } from "../../utils/is-apple";
 import { BlockFormatDropDown, blockFormats } from "./block-format-dropdown";
 import { ElementFormatDropdown } from "./element-format-dropdown";
-import { isApple } from "../../utils/is-apple";
 
 const IS_APPLE = isApple();
 
@@ -65,7 +65,7 @@ export function ToolbarPlugin({
   const [isLink, setIsLink] = useState(false);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
-  const [isUnderline, setIsUnderline] = useState(false);
+  const [_isUnderline, setIsUnderline] = useState(false);
 
   const [isRTL, setIsRTL] = useState(false);
 
@@ -165,7 +165,7 @@ export function ToolbarPlugin({
         });
       })
     );
-  }, [$updateToolbar, editor]);
+  }, [$updateToolbar, editor, activeEditor]);
 
   useEffect(() => {
     return activeEditor.registerCommand(
@@ -235,6 +235,7 @@ export function ToolbarPlugin({
     });
   }, [activeEditor]);
 
+  /*
   const insertLink = useCallback(() => {
     if (!isLink) {
       setIsLinkEditMode(true);
@@ -244,6 +245,7 @@ export function ToolbarPlugin({
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     }
   }, [editor, isLink, setIsLinkEditMode]);
+  */
 
   const portalTarget = getToolbarPortal(id);
 

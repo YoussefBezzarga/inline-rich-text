@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import initialData from "../initial-data.json";
 import { Data, resolveAllData } from "@measured/puck";
-import { config } from "../puck.config"
-
+import initialData from "../initial-data.json";
+import { config } from "../puck.config";
 
 const isBrowser = typeof window !== "undefined";
 
@@ -28,7 +27,7 @@ export const useDemoData = ({
         return JSON.parse(dataStr);
       }
 
-      return initialData[path] || undefined;
+      return initialData[path as keyof typeof initialData] || undefined;
     }
   });
 

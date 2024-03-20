@@ -23,7 +23,7 @@ export function withInlineEditable<TState, TConfig extends Config>(
         fields: {
           state: {
             type: "custom",
-            render: () => null,
+            render: (): null => null,
           },
         },
         render: ({
