@@ -1,9 +1,6 @@
 import { ComponentProps } from "react"
 
-import getClassNameFactory from "../../utils/get-class-name-factory"
-import styles from "./styles.module.css"
-
-const getClassName = getClassNameFactory("ToolbarButton", styles)
+import "./styles.module.css"
 
 export const Button = ({
   active,
@@ -11,7 +8,7 @@ export const Button = ({
 }: ComponentProps<"button"> & { active?: boolean }) => {
   return (
     <button
-      className={getClassName()}
+      className={"ToolbarButton"}
       style={{
         ...(active && { color: "var(--puck-color-azure-07)" }),
       }}

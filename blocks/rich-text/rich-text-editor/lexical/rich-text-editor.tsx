@@ -15,7 +15,7 @@ import { ToolbarPlugin } from "./plugins/toolbar-plugin"
 
 const PlaceHolder = () => (
   <div style={{ pointerEvents: "none", position: "absolute", top: 0 }}>
-    Click to edit text
+    Click to edit
   </div>
 )
 
@@ -56,7 +56,7 @@ export const InlineRichTextEditor = ({
       >
         <RichTextPlugin
           contentEditable={<ContentEditable style={{ outline: "none" }} />}
-          placeholder={enabled && PlaceHolder}
+          placeholder={<PlaceHolder />}
           ErrorBoundary={LexicalErrorBoundary}
         />
         <OnChangePlugin

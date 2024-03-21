@@ -1,8 +1,5 @@
 import { CSSProperties, ReactNode } from "react"
-import getClassNameFactory from "../../blocks/rich-text-editor/lexical/utils/get-class-name-factory"
-import styles from "./styles.module.css"
-
-const getClassName = getClassNameFactory("Section", styles)
+import "./styles.module.css"
 
 export type SectionProps = {
   className?: string
@@ -21,14 +18,14 @@ export const Section = ({
 }: SectionProps) => {
   return (
     <div
-      className={`${getClassName()}${className ? ` ${className}` : ""}`}
+      className={`${"Section"}${className ? ` ${className}` : ""}`}
       style={{
         ...style,
         paddingTop: padding,
         paddingBottom: padding,
       }}
     >
-      <div className={getClassName("inner")} style={{ maxWidth }}>
+      <div className={"Section-inner"} style={{ maxWidth }}>
         {children}
       </div>
     </div>

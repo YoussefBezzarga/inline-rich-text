@@ -55,7 +55,7 @@ export function ToolbarPlugin({
   id: string
   showToolbar: boolean
   setIsLinkEditMode: Dispatch<boolean>
-}): JSX.Element {
+}) {
   const [editor] = useLexicalComposerContext()
   const [activeEditor, setActiveEditor] = useState(editor)
   const [blockType, setBlockType] =

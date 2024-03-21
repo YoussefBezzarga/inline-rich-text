@@ -31,7 +31,7 @@ export async function ServerSideRender({
   state,
 }: {
   state: SerializedEditorState
-}): Promise<JSX.Element> {
+}) {
   if (!state) {
     return null
   }

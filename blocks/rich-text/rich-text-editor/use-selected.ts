@@ -16,12 +16,21 @@ export const useSelected = (componentId: string) => {
     }
   }
 
-  const item =
-    itemSelector.zone && itemSelector.zone !== "default-zone"
-      ? data.zones[itemSelector.zone][itemSelector.index]
-      : data.content[itemSelector.index]
+  const { index: destinationIndex, zone: destinationZone } = itemSelector
 
-  if (item.props.id !== componentId) {
+  if (!destinationZone) {
+    return {
+      isSelected: false,
+      onChange: () => {},
+    }
+  }
+
+  const item =
+    destinationZone !== "default-zone"
+      ? data.zones?.[destinationZone]?.[destinationIndex]
+      : data.content[destinationIndex]
+
+  if (item?.props.id !== componentId) {
     return {
       isSelected: false,
       onChange: () => {},
@@ -33,8 +42,8 @@ export const useSelected = (componentId: string) => {
     onChange: (props: Partial<typeof item.props>) =>
       dispatch({
         type: "replace",
-        destinationIndex: itemSelector.index,
-        destinationZone: itemSelector.zone,
+        destinationIndex,
+        destinationZone,
         data: {
           props: { ...item.props, ...props },
           type: item.type,

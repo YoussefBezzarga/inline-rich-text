@@ -1,10 +1,7 @@
 import React from "react"
 import { ComponentConfig } from "@measured/puck"
 import { Section } from "../../components/section"
-import getClassNameFactory from "../rich-text-editor/lexical/utils/get-class-name-factory"
-import styles from "./styles.module.css"
-
-const getClassName = getClassNameFactory("Columns", styles)
+import "./styles.module.css"
 
 export type ColumnsProps = {
   distribution: "auto" | "manual"
@@ -50,7 +47,7 @@ export const Columns: ComponentConfig<ColumnsProps> = {
     return (
       <Section>
         <div
-          className={getClassName()}
+          className={"Columns"}
           style={{
             gridTemplateColumns:
               distribution === "manual"
