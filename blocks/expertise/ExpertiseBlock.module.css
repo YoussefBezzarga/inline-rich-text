@@ -1,0 +1,68 @@
+/* ExpertiseBlock.module.css */
+
+.container {
+    width: 1440px;
+    padding: 160px 151px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: left;
+    margin-bottom: 64px;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .logos {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 64px;
+  }
+  
+  .logos img {
+    max-height: 40px;
+  }
+  
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .card p {
+    margin: 0;
+    color: #555;
+  }
+  
